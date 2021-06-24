@@ -13,8 +13,11 @@
 
 <body>
   <%- include('partials/navbar') %>
-
+    
     <div class="container">
+      <% if (!tickets || tickets.length === 0) { %>
+        <h1>Vous n'avez pas de tickets...Gros nul!!!</h1>
+      <% } else { %>
       <div class="row">
         <div class="col-12 d-flex flex-column">
           <h1 class="mt-5 mb-3 text-white">My last trips :</h1>
@@ -50,8 +53,9 @@
           <a href="/home" type="button" class="btn btn-danger align-self-end">Confirm</a>
         </div>
       </div>
-
+      <% } %>
     </div>
+    
 
     <%- include('partials/footer') %>
 </body>

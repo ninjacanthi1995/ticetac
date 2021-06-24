@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
 
 
 router.get("/home", async function (req, res) {
+  console.log(req.session.user);
   if (req.session.user) {
     res.render("home", { journeys: req.session.journeys });
   } else {
