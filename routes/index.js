@@ -1,8 +1,7 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-const journeyModel = require('../models/journeys');
-
+const journeyModel = require("../models/journeys");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,17 +9,21 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get('/home', async function(req, res){
-  res.render('home', {journeys: req.session.journeys})
-})
+router.get("/home", async function (req, res) {
+  if (req.session.user) {
+    res.render("home", { journeys: req.session.journeys });
+  } else {
+    res.redirect('/');
+  };
+});
 
-router.post('/search', async (req, res) => {
-  req.session.journeys = await journeyModel.find({ 
+router.post("/search", async (req, res) => {
+  req.session.journeys = await journeyModel.find({
     departure: req.body.fromCity,
     arrival: req.body.toCity,
-    date: new Date(req.body.date)
-  })
-  res.redirect('/home')
-})
+    date: new Date(req.body.date),
+  });
+  res.redirect("/home");
+});
 
 module.exports = router;
