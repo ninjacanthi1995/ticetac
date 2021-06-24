@@ -5,12 +5,13 @@ const journeyModel = require('../models/journeys');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+// router.get('/', function(req, res, next) {
+//   res.render('index', { title: 'Express' });
+// });
 
 router.get('/home', function(req, res){
-  res.render('home')
+  console.log(req.session.user);
+  res.render('home');
 })
 
 // Remplissage de la base de donnée, une fois suffit
