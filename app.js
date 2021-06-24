@@ -17,8 +17,7 @@ require('./models/connection');
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
+  saveUninitialized: false,
 }))
 
 // view engine setup
