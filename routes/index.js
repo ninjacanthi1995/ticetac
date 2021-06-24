@@ -26,4 +26,30 @@ router.post("/search", async (req, res) => {
   res.redirect("/home");
 });
 
+router.get('/tickets', async (req, res) => {
+  const tickets = [
+    {
+      departure: "Rennes",
+      arrival: "Lille",
+      date: {
+        $date: "2018-11-24T00:00:00.000Z",
+      },
+      departureTime: "13:00",
+      price: 117,
+      __v: 0,
+    },
+    {
+      departure: "Nantes",
+      arrival: "Lille",
+      date: {
+        $date: "2018-11-24T00:00:00.000Z",
+      },
+      departureTime: "18:00",
+      price: 109,
+      __v: 0,
+    }
+  ];
+  res.render('tickets', { tickets: tickets });
+});
+
 module.exports = router;

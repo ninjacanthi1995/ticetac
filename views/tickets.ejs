@@ -22,25 +22,32 @@
           <table class="table bg-white rounded">
             <thead>
               <tr>
-                <th scope="col">Date</th>
+                <th scope="col">N°</th>
                 <th scope="col">Journey</th>
+                <th scope="col">Date</th>
                 <th scope="col">Departure time</th>
                 <th scope="col">Price</th>
               </tr>
             </thead>
             <tbody>
-              <% for( let i=0; i < journeys.length; i++ ) { %>
+              <% for( let i=0; i < tickets.length; i++ ) { %>
               <tr>
-                <td><%= dateFormat(new Date(journeys[i].date['$date'])) %> </td>
-                <td><%= journeys[i].departure %>/<%= journeys[i].arrival %></td>
-                <td><%= journeys[i].departureTime %></td>
-                <td><%= journeys[i].price %>€</td>
+                <td><%= i + 1 %></td>
+                <td><%= tickets[i].departure %>/<%= tickets[i].arrival %></td>
+                <td><%= dateFormat(new Date(tickets[i].date['$date'])) %> </td>
+                <td><%= tickets[i].departureTime %></td>
+                <td><%= tickets[i].price %>€</td>
               </tr>
               <% } %>
+              <tr class="table-danger">
+                <td>Total</td>
+                <td colspan="3"></td>
+                <td><%= tickets.map(ticket => ticket.price).reduce((a, b) => a + b) %>€</td>
+              </tr>
             </tbody>
           </table>
 
-          <a href="/home" type="button" class="btn btn-danger align-self-end">Home</a>
+          <a href="/home" type="button" class="btn btn-danger align-self-end">Confirm</a>
         </div>
       </div>
 
