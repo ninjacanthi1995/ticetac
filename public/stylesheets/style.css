@@ -26,3 +26,6 @@ a {
   max-height: 50vh;
   width: auto;
 }
+.ml-2{
+  margin-left: 2rem;
+}
