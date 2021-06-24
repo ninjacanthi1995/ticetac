@@ -26,30 +26,21 @@ router.post("/search", async (req, res) => {
   res.redirect("/home");
 });
 
+router.post("/push-journey", async (req, res) => {
+  if(!req.session.tickets){
+    req.session.tickets = []
+  }
+  const alreadyThere_ = req.session.tickets.find(e => e._id === req.body.id)
+  if(!alreadyThere_){
+    const ticket = await journeyModel.findById(req.body.id)
+    req.session.tickets.push(ticket)
+  }
+
+  res.redirect('/tickets')
+});
+
 router.get('/tickets', async (req, res) => {
-  const tickets = [
-    {
-      departure: "Rennes",
-      arrival: "Lille",
-      date: {
-        $date: "2018-11-24T00:00:00.000Z",
-      },
-      departureTime: "13:00",
-      price: 117,
-      __v: 0,
-    },
-    {
-      departure: "Nantes",
-      arrival: "Lille",
-      date: {
-        $date: "2018-11-24T00:00:00.000Z",
-      },
-      departureTime: "18:00",
-      price: 109,
-      __v: 0,
-    }
-  ];
-  res.render('tickets', { tickets: tickets });
+  res.render('tickets', { tickets: req.session.tickets });
 });
 
 module.exports = router;

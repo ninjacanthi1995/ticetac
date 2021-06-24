@@ -20,7 +20,7 @@ a {
   color: lightgray;
 }
 .container{
-  min-height: calc(100vh - 90px);
+  min-height: calc(100vh - 90px - 1rem);
 }
 .landmark{
   max-height: 50vh;
