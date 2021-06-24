@@ -11,30 +11,47 @@
 <body>
   <%- include('partials/navbar') %>
   <div class="container">
-    <form action="/search" method="post" class="row mt-3">
-      <div class="col-12 col-md-3 mt-3">
-        <input type="text" class="form-control" value="Rennes" name="fromCity" placeholder="From: Paris, Marseille...">
+    <form action="/search" method="post" class="row mt-3 mb-5">
+      <div class="offset-md-1 col-12 col-md-3 mt-3">
+        <input type="text" class="form-control" value="" name="fromCity" placeholder="From: Paris, Marseille...">
       </div>
       <div class="col-12 col-md-3 mt-3">
-        <input type="text" class="form-control" value="Lille" name="toCity" placeholder="To: Lille, Nantes...">
+        <input type="text" class="form-control" value="" name="toCity" placeholder="To: Lille, Nantes...">
       </div>
       <div class="col-12 col-md-3 mt-3">
         <input type="date" class="form-control" name="date" value="2018-11-24" min="2018-01-01" max="2021-12-31">
       </div>
-      <button type="submit" class="btn btn-danger col-12 col-md-3 mt-3">Go</button>
+      <div class="col-12 col-md-1 mt-3">
+        <button type="submit" class="btn btn-danger">Go</button>
+      </div>
     </form>
 
-    <% if (journeys) { %>
-    <% for( let i = 0; i < journeys.length; i++ ) { %>
-      <div class="card">
-        <div class="card-body">
-          <p>Paris / Lille</p>
-          <span>train departure at: 13:00</span>
-          94€
-          <button class="btn btn-danger"></button>
+    <% if (journeys && journeys.length !== 0) { %>
+      <div class="row">
+        <h2 class="offset-md-1">Trajet pour le: <%= dateFormat(new Date(journeys[0].date)) %></h2>
+      <% for( let i = 0; i < journeys.length; i++ ) { %>
+        <div class="mb-3 col-12 offset-md-1 col-md-10">
+          <div class="card">
+            <div class="card-body d-flex align-items-baseline justify-content-between">
+              <%= journeys[i].departure %> / <%= journeys[i].arrival %> 
+              <span class="text-secondary">train departure at: <%= journeys[i].departureTime %></span>
+              <div>
+                <%= journeys[i].price %>€
+                <button class="btn btn-danger ml-2">OK</button>
+              </div>
+            </div>
+          </div>
         </div>
+      <% } %>
       </div>
-    <% } %>
+    <% }else if(journeys && journeys.length === 0){ %>
+      <div class="row">
+        <h2 class="offset-md-1">Nope ! Rien de rien ! Je ne trouve rien !</h2>
+      </div>
+    <% }else{ %>
+      <div class="justify-content-center row">
+        <img class="landmark" src="/images/landmark.png" alt="">
+      </div>
     <% } %>
   </div>
   <%- include('partials/footer') %> 

@@ -19,7 +19,11 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }))
-
+app.locals.dateFormat = date => {
+  console.log(`typeof date`, typeof date)
+  console.log(`date`, date)
+  return `${('0' + date.getDate()).slice(-2)}/${("0" + (date.getMonth() + 1)).slice(-2)}/${date.getFullYear()}`
+}
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
