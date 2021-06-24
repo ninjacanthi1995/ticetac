@@ -1,8 +1,20 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  background-image: linear-gradient(#C4DCE8, #3381B5);
+  color: white;
 }
 
 a {
   color: #00B7FF;
+}
+
+#footer{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  color: lightgray;
+}
+.container{
+  min-height: calc(100vh - 90px);
 }
