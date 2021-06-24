@@ -10,11 +10,11 @@ router.get('/', function(req, res, next) {
 
 
 router.get("/home", async function (req, res) {
-  if (req.session.user) {
+  // if (req.session.user) {
     res.render("home", { journeys: req.session.journeys });
-  } else {
-    res.redirect('/');
-  };
+  // } else {
+  //   res.redirect('/');
+  // };
 });
 
 router.post("/search", async (req, res) => {
@@ -25,5 +25,19 @@ router.post("/search", async (req, res) => {
   });
   res.redirect("/home");
 });
+
+router.post("/push-journey", async (req, res) => {
+  if(!req.session.tickets){
+    console.log('check !')
+    req.session.tickets = []
+  }
+  const alreadyThere_ = req.session.tickets.find(e => e._id === req.body.id)
+  if(!alreadyThere_){
+    const ticket = await journeyModel.findById(req.body.id)
+    req.session.tickets.push(ticket)
+  }
+
+  res.redirect('/tickets')
+})
 
 module.exports = router;
