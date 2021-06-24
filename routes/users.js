@@ -5,9 +5,9 @@ const bcrypt = require("bcrypt");
 const userModel = require("../models/users");
 
 /* GET users listing. */
-router.get("/", function (req, res) {
-  res.render("index");
-});
+// router.get("/", function (req, res) {
+//   res.render("index");
+// });
 
 router.post("/sign-up", async (req, res) => {
   const searchUser = await userModel.findOne({

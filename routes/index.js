@@ -4,9 +4,9 @@ var router = express.Router();
 const journeyModel = require("../models/journeys");
 
 /* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
+router.get('/', function(req, res, next) {
+  res.render('index');
+});
 
 let journeys;
 
