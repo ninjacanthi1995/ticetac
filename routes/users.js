@@ -20,11 +20,9 @@ router.post("/sign-up", async (req, res) => {
         journeys: [],
       });
       const savedUser = await newUser.save();
-      req.session.user = {
-        email: savedUser.email,
-      };
+      req.session.user = savedUser
+      res.redirect("/home");
     });
-    res.redirect("/home");
   } else {
     res.redirect("/");
   }
@@ -41,9 +39,7 @@ router.post("/sign-in", async (req, res) => {
       async function (err, result) {
         if (result) {
           // Passwords match
-          req.session.user = {
-            email: searchUser.email,
-          };
+          req.session.user = searchUser;
           res.redirect("/home");
         } else {
           // Passwords don't match
@@ -63,33 +59,10 @@ router.get("/logout", async (req, res) => {
 
 router.get("/journeys", async (req, res) => {
   if(req.session.user){
-    const journeys = [
-      {
-        departure: "Rennes",
-        arrival: "Lille",
-        date: {
-          $date: "2018-11-24T00:00:00.000Z",
-        },
-        departureTime: "13:00",
-        price: 117,
-        __v: 0,
-      },
-      {
-        departure: "Nantes",
-        arrival: "Lille",
-        date: {
-          $date: "2018-11-24T00:00:00.000Z",
-        },
-        departureTime: "18:00",
-        price: 109,
-        __v: 0,
-      }
-    ];
-
     const user = await userModel
-      .findOne({ email: req.session.user.email })
+      .findById(req.session.user._id)
       .populate("journeys");
-    res.render("journeys", { journeys: journeys });
+    res.render("journeys", { journeys: user.journeys });
   }
   res.redirect("/")
 });

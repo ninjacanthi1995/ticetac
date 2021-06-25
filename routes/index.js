@@ -2,9 +2,17 @@ var express = require("express");
 var router = express.Router();
 
 const journeyModel = require("../models/journeys");
+const userModel = require("../models/users");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
+  if(req.session.user){
+    res.redirect("/home")
+  // }else{
+  //   req.session.user = await userModel.find({ email: "dorian@mail.com" })
+  //   req.session.user = req.session.user[0]
+  //   res.redirect('/home')
+  }
   res.render('index');
 });
 
@@ -55,5 +63,12 @@ router.get('/delete-ticket', (req, res) => {
     res.render('tickets', { tickets: req.session.tickets });
   }
 });
+
+router.post('/journeys-to-db', async (req, res) => {
+  const user = await userModel.findById(req.session.user._id)
+  user.journeys.push(...JSON.parse(req.body.arrayid))
+  user.save()
+  res.redirect("/home")
+})
 
 module.exports = router;
