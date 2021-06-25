@@ -36,7 +36,7 @@
                 <tr>
                   <td class="p-3"><%= dateFormat(new Date(journeys[i].date)) %> </td>
                   <td class="p-3"><%= journeys[i].departure %>/<%= journeys[i].arrival %></td>
-                  <td class="p-3"><%= journeys[i].departureTime %></td>
+                  <td class="p-3"><%= timeFormat(journeys[i].departureTime) %></td>
                   <td class="p-3"><%= journeys[i].price %>€</td>
                 </tr>
                 <% } %>

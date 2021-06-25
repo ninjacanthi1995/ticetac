@@ -28,7 +28,7 @@
                             <td><%= i + 1 %></td>
                             <td><%= tickets[i].departure %>/<%= tickets[i].arrival %></td>
                             <td><%= dateFormat(new Date(tickets[i].date)) %> </td>
-                            <td><%= tickets[i].departureTime %></td>
+                            <td><%= timeFormat(tickets[i].departureTime) %></td>
                             <td><%= tickets[i].price %>€</td>
                         </tr>
                         <% } %>

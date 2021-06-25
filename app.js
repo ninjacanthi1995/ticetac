@@ -19,9 +19,16 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }))
-app.locals.dateFormat = date => {
-  return `${('0' + date.getDate()).slice(-2)}/${("0" + (date.getMonth() + 1)).slice(-2)}/${date.getFullYear()}`
+app.locals.dateFormat = date => `${('0' + date.getDate()).slice(-2)}/${("0" + (date.getMonth() + 1)).slice(-2)}/${date.getFullYear()}`
+app.locals.timeFormat = time => {
+  let text = " pm"
+  if(parseInt(time, 10) < 12){
+    text = " am"
+  }
+  return `${time}${text}`
 }
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
