@@ -12,8 +12,9 @@ router.get('/', async function(req, res, next) {
   //   req.session.user = await userModel.find({ email: "dorian@mail.com" })
   //   req.session.user = req.session.user[0]
   //   res.redirect('/home')
+  }else{
+    res.render('index');
   }
-  res.render('index');
 });
 
 
@@ -50,8 +51,9 @@ router.post("/push-journey", async (req, res) => {
 router.get('/tickets', (req, res) => {
   if(req.session.user){
     res.render('tickets', { tickets: req.session.tickets });
+  }else{
+    res.redirect('/')
   }
-  res.redirect('/')
 });
 
 router.post('/journeys-to-db', async (req, res) => {
