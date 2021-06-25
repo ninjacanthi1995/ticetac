@@ -19,9 +19,12 @@ router.post("/sign-up", async (req, res) => {
         password: hash,
         journeys: [],
       });
-      req.session.user = await newUser.save();
-      res.redirect("/home");
+      const savedUser = await newUser.save();
+      req.session.user = {
+        email: savedUser.email,
+      };
     });
+    res.redirect("/home");
   } else {
     res.redirect("/");
   }
