@@ -34,3 +34,10 @@ a {
   overflow-y: hidden;
   animation: apparition 1s;
 }
+
+
+@media (max-width: 768px){
+  .ml-2{
+    margin-left: .5rem;
+  }
+}

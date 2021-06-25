@@ -41,7 +41,8 @@
           <div class="card">
             <div class="card-body d-flex align-items-center justify-content-between">
               <%= journeys[i].departure %> / <%= journeys[i].arrival %> 
-              <span class="text-secondary">train departure at: <%= timeFormat(journeys[i].departureTime) %></span>
+              <span class="text-secondary d-md-block d-none">train departure at: <%= timeFormat(journeys[i].departureTime) %></span>
+              <span class="text-secondary d-md-none"><%= timeFormat(journeys[i].departureTime) %></span>
               <div class="d-flex align-items-center">
                 <%= journeys[i].price %>€
                 <form action="/push-journey" class="ml-2" method="post">
