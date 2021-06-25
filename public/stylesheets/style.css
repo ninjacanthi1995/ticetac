@@ -14,7 +14,6 @@ a {
 }
 
 #footer{
-  width: 100vw;
   display: flex;
   justify-content: center;
   color: lightgray;

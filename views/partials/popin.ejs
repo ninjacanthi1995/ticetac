@@ -19,7 +19,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                        <% for( let i=0; i < tickets.length; i++ ) { %>
+                        <% 
+                            const arrayId = []
+                            for( let i=0; i < tickets.length; i++ ) { 
+                                arrayId.push(tickets[i]._id)
+                        %>
                         <tr>
                             <td><%= i + 1 %></td>
                             <td><%= tickets[i].departure %>/<%= tickets[i].arrival %></td>
@@ -38,7 +42,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <a href="/home" type="button" class="btn btn-danger align-self-end">Confirm</a>
+                <form action="/journeys-to-db" method="post">
+                    <input type="hidden" name="arrayid" value="<%= JSON.stringify(arrayId) %>">
+                    <button class="btn btn-danger align-self-end">Confirm</button>
+                </form>
             </div>
         </div>
     </div>
