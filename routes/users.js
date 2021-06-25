@@ -25,6 +25,7 @@ router.post("/sign-up", async (req, res) => {
       res.redirect("/home");
     });
   } else {
+    req.session.error = "Email existe déjà";
     res.redirect("/");
   }
 });
@@ -45,11 +46,13 @@ router.post("/sign-in", async (req, res) => {
           res.redirect("/home");
         } else {
           // Passwords don't match
+          req.session.error = 'Mot de passe incorrect!';
           res.redirect("/");
         }
       }
     );
   } else {
+    req.session.error = 'Utilisateur non trouvé!';
     res.redirect("/");
   }
 });

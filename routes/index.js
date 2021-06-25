@@ -12,8 +12,10 @@ router.get('/', async function(req, res, next) {
   //   req.session.user = await userModel.find({ email: "dorian@mail.com" })
   //   req.session.user = req.session.user[0]
   //   res.redirect('/home')
-  }else{
-    res.render('index');
+  } else {
+    let error = req.session.error;
+    req.session.error = null;
+    res.render('index', { error });
   }
 });
 
