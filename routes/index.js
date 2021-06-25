@@ -62,8 +62,6 @@ router.get('/delete-ticket', (req, res) => {
   } else {
     req.session.tickets.splice(req.query.index, 1);
     res.render('tickets', { tickets: req.session.tickets });
-  }else{
-    res.redirect('/')
   }
 });
 

@@ -20,7 +20,8 @@ router.post("/sign-up", async (req, res) => {
         journeys: [],
       });
       const savedUser = await newUser.save();
-      req.session.user = savedUser
+      req.session.user = savedUser;
+      req.session.tickets = [];
       res.redirect("/home");
     });
   } else {
@@ -40,6 +41,7 @@ router.post("/sign-in", async (req, res) => {
         if (result) {
           // Passwords match
           req.session.user = searchUser;
+          req.session.tickets = [];
           res.redirect("/home");
         } else {
           // Passwords don't match
