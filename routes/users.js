@@ -62,33 +62,36 @@ router.get("/logout", async (req, res) => {
 });
 
 router.get("/journeys", async (req, res) => {
-  const journeys = [
-    {
-      departure: "Rennes",
-      arrival: "Lille",
-      date: {
-        $date: "2018-11-24T00:00:00.000Z",
+  if(req.session.user){
+    const journeys = [
+      {
+        departure: "Rennes",
+        arrival: "Lille",
+        date: {
+          $date: "2018-11-24T00:00:00.000Z",
+        },
+        departureTime: "13:00",
+        price: 117,
+        __v: 0,
       },
-      departureTime: "13:00",
-      price: 117,
-      __v: 0,
-    },
-    {
-      departure: "Nantes",
-      arrival: "Lille",
-      date: {
-        $date: "2018-11-24T00:00:00.000Z",
-      },
-      departureTime: "18:00",
-      price: 109,
-      __v: 0,
-    }
-  ];
+      {
+        departure: "Nantes",
+        arrival: "Lille",
+        date: {
+          $date: "2018-11-24T00:00:00.000Z",
+        },
+        departureTime: "18:00",
+        price: 109,
+        __v: 0,
+      }
+    ];
 
-  const user = await userModel
-    .findOne({ email: req.session.user.email })
-    .populate("journeys");
-  res.render("journeys", { journeys: journeys });
+    const user = await userModel
+      .findOne({ email: req.session.user.email })
+      .populate("journeys");
+    res.render("journeys", { journeys: journeys });
+  }
+  res.redirect("/")
 });
 
 module.exports = router;
