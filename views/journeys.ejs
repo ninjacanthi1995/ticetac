@@ -22,19 +22,19 @@
           <table class="table bg-white rounded">
             <thead>
               <tr>
-                <th scope="col">Date</th>
-                <th scope="col">Journey</th>
-                <th scope="col">Departure time</th>
-                <th scope="col">Price</th>
+                <th class="p-3" scope="col">Date</th>
+                <th class="p-3" scope="col">Journey</th>
+                <th class="p-3" scope="col">Departure time</th>
+                <th class="p-3" scope="col">Price</th>
               </tr>
             </thead>
             <tbody>
               <% for( let i=0; i < journeys.length; i++ ) { %>
               <tr>
-                <td><%= dateFormat(new Date(journeys[i].date['$date'])) %> </td>
-                <td><%= journeys[i].departure %>/<%= journeys[i].arrival %></td>
-                <td><%= journeys[i].departureTime %></td>
-                <td><%= journeys[i].price %>€</td>
+                <td class="p-3"><%= dateFormat(new Date(journeys[i].date['$date'])) %> </td>
+                <td class="p-3"><%= journeys[i].departure %>/<%= journeys[i].arrival %></td>
+                <td class="p-3"><%= journeys[i].departureTime %></td>
+                <td class="p-3"><%= journeys[i].price %>€</td>
               </tr>
               <% } %>
             </tbody>
