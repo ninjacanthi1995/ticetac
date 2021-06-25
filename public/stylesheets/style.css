@@ -28,3 +28,9 @@ a {
 .ml-2{
   margin-left: 2rem;
 }
+
+#success{
+  border: 0; 
+  overflow-y: hidden;
+  animation: apparition 1s;
+}

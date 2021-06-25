@@ -22,7 +22,13 @@ router.get('/', async function(req, res, next) {
 
 router.get("/home", async function (req, res) {
   if (req.session.user) {
-    res.render("home", { journeys: req.session.journeys });
+    let success
+    if(req.session.success){
+      success = req.session.success
+      delete req.session.success
+      console.log(`success`, success)
+    }
+    res.render("home", { journeys: req.session.journeys, success });
   } else {
     res.redirect('/');
   };
@@ -71,6 +77,8 @@ router.post('/journeys-to-db', async (req, res) => {
   const user = await userModel.findById(req.session.user._id)
   user.journeys.push(...JSON.parse(req.body.arrayid))
   user.save()
+  req.session.success = "Votre commande a bien été enregistré 🎉"
+  req.session.tickets = []
   res.redirect("/home")
 })
 

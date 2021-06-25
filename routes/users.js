@@ -11,6 +11,7 @@ router.post("/sign-up", async (req, res) => {
     email: req.body.email,
   });
   if (!searchUser) {
+    delete req.session.error
     bcrypt.hash(req.body.password, 10, async function (err, hash) {
       const newUser = new userModel({
         name: req.body.name,
@@ -25,7 +26,7 @@ router.post("/sign-up", async (req, res) => {
       res.redirect("/home");
     });
   } else {
-    req.session.error = "Email existe déjà";
+    req.session.error = "Cet email est déjà pris";
     res.redirect("/");
   }
 });
@@ -35,6 +36,7 @@ router.post("/sign-in", async (req, res) => {
     email: req.body.email,
   });
   if (searchUser) {
+    delete req.session.error
     bcrypt.compare(
       req.body.password,
       searchUser.password,
@@ -52,13 +54,14 @@ router.post("/sign-in", async (req, res) => {
       }
     );
   } else {
-    req.session.error = 'Utilisateur non trouvé!';
+    req.session.error = "Nous n'avons pas trouvé votre compte 😭";
     res.redirect("/");
   }
 });
 
 router.get("/logout", async (req, res) => {
   req.session.user = null;
+  req.session.tickets = []
   res.redirect("/");
 });
 
@@ -66,7 +69,7 @@ router.get("/journeys", async (req, res) => {
   if(req.session.user){
     const user = await userModel
       .findById(req.session.user._id)
-      .populate("journeys");
+      .populate("journeys")
     res.render("journeys", { journeys: user.journeys });
   }else{
     res.redirect("/")

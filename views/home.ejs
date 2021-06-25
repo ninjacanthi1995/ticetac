@@ -10,7 +10,14 @@
 </head>
 <body>
   <%- include('partials/navbar') %>
+
+  
   <div class="container">
+    <% if (success) { %>
+      <div class="alert alert-success text-center mt-3" id="success-alert" role="alert">
+        Votre commande a bien été enregistré 🎉
+      </div>
+    <% } %>
     <form action="/search" method="post" class="row mt-3 mb-5">
       <div class="offset-md-1 col-12 col-md-3 mt-3">
         <input type="text" class="form-control" value="" name="fromCity" placeholder="From: Paris, Marseille...">
@@ -58,5 +65,6 @@
     <% } %>
   </div>
   <%- include('partials/footer') %> 
+  <script src="/js/hideAlert.js"></script>
 </body>
 </html>
