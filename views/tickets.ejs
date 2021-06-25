@@ -23,36 +23,38 @@
         <div class="col-12 d-flex flex-column">
           <h1 class="mt-5 mb-3 text-white">My tickets :</h1>
 
-          <table class="table bg-white rounded">
-            <thead>
-              <tr class="m-5">
-                <th class="p-3" scope="col">N°</th>
-                <th class="p-3" scope="col">Journey</th>
-                <th class="p-3" scope="col">Date</th>
-                <th class="p-3" scope="col">Departure time</th>
-                <th class="p-3" scope="col">Price</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% for( let i=0; i < tickets.length; i++ ) { %>
-              <tr>
-                <td class="p-3"><%= i + 1 %></td>
-                <td class="p-3"><%= tickets[i].departure %>/<%= tickets[i].arrival %></td>
-                <td class="p-3"><%= dateFormat(new Date(tickets[i].date)) %> </td>
-                <td class="p-3"><%= timeFormat(tickets[i].departureTime) %></td>
-                <td class="p-3"><%= tickets[i].price %>€</td>
-                <td class="p-3"><a href="/delete-ticket?index=<%= i %>"><i class="fas fa-trash-alt"></i></a></td>
-              </tr>
-              <% } %>
-              <tr class="table-danger">
-                <td class="p-3">Total</td>
-                <td colspan="3"></td>
-                <td class="p-3"><%= tickets.map(ticket => ticket.price).reduce((a, b) => a + b, 0) %>€</td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="table bg-white rounded">
+              <thead style="max-width: 100%;">
+                <tr>
+                  <th class="p-3" scope="col">N°</th>
+                  <th class="p-3" scope="col">Journey</th>
+                  <th class="p-3" scope="col">Date</th>
+                  <th class="p-3" scope="col">Departure time</th>
+                  <th class="p-3" scope="col">Price</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for( let i=0; i < tickets.length; i++ ) { %>
+                <tr>
+                  <td class="p-3"><%= i + 1 %></td>
+                  <td class="p-3"><%= tickets[i].departure %>/<%= tickets[i].arrival %></td>
+                  <td class="p-3"><%= dateFormat(new Date(tickets[i].date)) %> </td>
+                  <td class="p-3"><%= timeFormat(tickets[i].departureTime) %></td>
+                  <td class="p-3"><%= tickets[i].price %>€</td>
+                  <td class="p-3"><a href="/delete-ticket?index=<%= i %>"><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+                <% } %>
+                <tr class="table-danger">
+                  <td class="p-3">Total</td>
+                  <td colspan="3"></td>
+                  <td class="p-3"><%= tickets.map(ticket => ticket.price).reduce((a, b) => a + b, 0) %>€</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <!-- Button trigger modal -->
           <div class="align-self-end">

@@ -22,26 +22,28 @@
           <% if (!journeys || journeys.length === 0) { %>
             <h2>Vous n'avez pas fait de voyages 😭</h2>
           <% }else{ %>
-            <table class="table bg-white rounded">
-              <thead>
-                <tr>
-                  <th class="p-3" scope="col">Date</th>
-                  <th class="p-3" scope="col">Journey</th>
-                  <th class="p-3" scope="col">Departure time</th>
-                  <th class="p-3" scope="col">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% for( let i=0; i < journeys.length; i++ ) { %>
-                <tr>
-                  <td class="p-3"><%= dateFormat(new Date(journeys[i].date)) %> </td>
-                  <td class="p-3"><%= journeys[i].departure %>/<%= journeys[i].arrival %></td>
-                  <td class="p-3"><%= timeFormat(journeys[i].departureTime) %></td>
-                  <td class="p-3"><%= journeys[i].price %>€</td>
-                </tr>
-                <% } %>
-              </tbody>
-            </table>
+            <div class="table-responsive">
+              <table class="table bg-white rounded">
+                <thead>
+                  <tr>
+                    <th class="p-3" scope="col">Date</th>
+                    <th class="p-3" scope="col">Journey</th>
+                    <th class="p-3" scope="col">Departure time</th>
+                    <th class="p-3" scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for( let i=0; i < journeys.length; i++ ) { %>
+                  <tr>
+                    <td class="p-3"><%= dateFormat(new Date(journeys[i].date)) %> </td>
+                    <td class="p-3"><%= journeys[i].departure %>/<%= journeys[i].arrival %></td>
+                    <td class="p-3"><%= timeFormat(journeys[i].departureTime) %></td>
+                    <td class="p-3"><%= journeys[i].price %>€</td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
           <% } %>
 
           <a href="/home" type="button" class="btn btn-danger align-self-end">Home</a>
