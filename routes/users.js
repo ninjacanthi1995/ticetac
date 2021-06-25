@@ -63,8 +63,9 @@ router.get("/journeys", async (req, res) => {
       .findById(req.session.user._id)
       .populate("journeys");
     res.render("journeys", { journeys: user.journeys });
+  }else{
+    res.redirect("/")
   }
-  res.redirect("/")
 });
 
 module.exports = router;
