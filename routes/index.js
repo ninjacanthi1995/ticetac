@@ -10,7 +10,6 @@ router.get('/', function(req, res, next) {
 
 
 router.get("/home", async function (req, res) {
-  console.log(req.session.user);
   if (req.session.user) {
     res.render("home", { journeys: req.session.journeys });
   } else {
@@ -41,7 +40,20 @@ router.post("/push-journey", async (req, res) => {
 });
 
 router.get('/tickets', async (req, res) => {
-  res.render('tickets', { tickets: req.session.tickets });
+  if (!req.session.user) {
+    res.redirect('/');
+  } else {
+    res.render('tickets', { tickets: req.session.tickets });
+  }
+});
+
+router.get('/delete-ticket', (req, res) => {
+  if (!req.session.user) {
+    res.redirect('/');
+  } else {
+    req.session.tickets.splice(req.query.index, 1);
+    res.render('tickets', { tickets: req.session.tickets });
+  }
 });
 
 module.exports = router;
